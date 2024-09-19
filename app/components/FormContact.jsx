@@ -15,9 +15,10 @@ export default function FormContact() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  // Estados para errores, cargando y habilitación del botón de envío
+  // Estados para errores, cargando y mensaje de éxito
   const [errors, setErrors] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   // Validaciones simples
   const validate = () => {
@@ -55,7 +56,10 @@ export default function FormContact() {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
+
+        setSuccessMessage(`Thank you for your message, ${name}!`);
         Alert.alert("Success", `Thank you for your message, ${name}!`);
+        
         // Limpiar los campos del formulario
         setName('');
         setEmail('');
@@ -100,6 +104,10 @@ export default function FormContact() {
           <Text style={styles.buttonText}>Send</Text>
         </TouchableOpacity>
       )}
+
+      {/* Mostrar el mensaje de éxito */}
+      {successMessage ? <Text style={styles.successText}>{successMessage}</Text> : null}
+
     </View>
   );
 }
@@ -143,5 +151,10 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontWeight: "bold",
+  },
+  successText: {
+    color: "green",
+    marginTop: 20,
+    textAlign: "center",
   },
 });
