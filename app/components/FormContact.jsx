@@ -55,7 +55,10 @@ export default function FormContact() {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-        setSuccessMessage(`Thank you for your message, ${name}!`);
+        
+        const successMsg = `Thank you for your message, ${name}!`;
+        setSuccessMessage(successMsg);
+        Alert.alert("Success", successMsg);
 
         // Limpiar los campos del formulario
         setName('');
