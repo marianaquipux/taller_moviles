@@ -26,7 +26,7 @@ export default function FormContact() {
     const newErrors = { name: "", email: "", message: "" };
     
     // Expresion regular para validar el formato del correo enviado.
-    const regex = /^[^\s@]+@(gmail\.com|comunidad\.iush|hotmail\.com|yahoo\.com|outlook\.com)$/;
+    const regex = /^[^\s@]+@(gmail\.com|comunidad\.iush.com|hotmail\.com|yahoo\.com|outlook\.com)$/;
 
     if (!name) {
       newErrors.name = "Name is required.";
