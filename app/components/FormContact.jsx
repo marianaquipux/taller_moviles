@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   TextInput,
-  Alert,
   Text,
   TouchableOpacity,
   StyleSheet,
@@ -33,7 +32,7 @@ export default function FormContact() {
     if (!email) {
       newErrors.email = "Email is required";
       valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) { // Validar que sea un correo válido
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = "Enter a valid email.";
       valid = false;
     }
@@ -41,8 +40,8 @@ export default function FormContact() {
     if (!message) {
       newErrors.message = "Message is required.";
       valid = false;
-    } else if (message.length < 10) { // Validar la longitud del mensaje
-      newErrors.message = "Message must be at least 10 characters";
+    } else if (message.length < 10) {
+      newErrors.message = "Message must be at least 10 characters.";
       valid = false;
     }
 
@@ -56,14 +55,17 @@ export default function FormContact() {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-
         setSuccessMessage(`Thank you for your message, ${name}!`);
-        Alert.alert("Success", `Thank you for your message, ${name}!`);
-        
+
         // Limpiar los campos del formulario
         setName('');
         setEmail('');
         setMessage('');
+
+        // Ocultar el mensaje de éxito después de 3 segundos
+        setTimeout(() => {
+          setSuccessMessage('');
+        }, 3000);
       }, 2000); // Simula un envío que dura 2 segundos
     }
   };
@@ -107,7 +109,6 @@ export default function FormContact() {
 
       {/* Mostrar el mensaje de éxito */}
       {successMessage ? <Text style={styles.successText}>{successMessage}</Text> : null}
-
     </View>
   );
 }
