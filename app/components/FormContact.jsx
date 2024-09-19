@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {
-  View,
-  TextInput,
-  Alert,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
   ActivityIndicator,
+  Alert,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from "react-native";
 
 export default function FormContact() {
@@ -33,7 +33,7 @@ export default function FormContact() {
     if (!email) {
       newErrors.email = "Email is required";
       valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) { // Validar que sea un correo válido
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = "Enter a valid email.";
       valid = false;
     }
@@ -41,8 +41,8 @@ export default function FormContact() {
     if (!message) {
       newErrors.message = "Message is required.";
       valid = false;
-    } else if (message.length < 10) { // Validar la longitud del mensaje
-      newErrors.message = "Message must be at least 10 characters";
+    } else if (message.length < 10) {
+      newErrors.message = "Message must be at least 10 characters.";
       valid = false;
     }
 
@@ -56,14 +56,20 @@ export default function FormContact() {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-
-        setSuccessMessage(`Thank you for your message, ${name}!`);
-        Alert.alert("Success", `Thank you for your message, ${name}!`);
         
+        const successMsg = `Thank you for your message, ${name}!`;
+        setSuccessMessage(successMsg);
+        Alert.alert("Success", successMsg);
+
         // Limpiar los campos del formulario
         setName('');
         setEmail('');
         setMessage('');
+
+        // Ocultar el mensaje de éxito después de 3 segundos
+        setTimeout(() => {
+          setSuccessMessage('');
+        }, 3000);
       }, 2000); // Simula un envío que dura 2 segundos
     }
   };
@@ -107,40 +113,46 @@ export default function FormContact() {
 
       {/* Mostrar el mensaje de éxito */}
       {successMessage ? <Text style={styles.successText}>{successMessage}</Text> : null}
-
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    backgroundColor: "#f5f5f5",
+    padding: 30,
+    backgroundColor: "#ffffff",
     flex: 1,
     justifyContent: "center",
   },
   title: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: "bold",
-    marginBottom: 20,
+    marginBottom: 30,
     textAlign: "center",
     color: "#333",
+    letterSpacing: 1,
   },
   input: {
-    height: 50,
-    borderColor: "#ddd",
+    height: 55,
+    borderColor: "#e0e0e0",
     borderWidth: 1,
-    marginBottom: 15,
-    paddingLeft: 10,
-    borderRadius: 10,
-    backgroundColor: "#fff",
+    marginBottom: 20,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 8,
+    backgroundColor: "#f9f9f9",
+    fontSize: 16,
+    color: "#333",
   },
   errorText: {
-    color: "red",
+    color: "#ff3d00",
     marginBottom: 10,
+    fontSize: 14,
+    fontStyle: "italic",
   },
   errorInput: {
-    borderColor: "red",
+    borderColor: "#ff3d00",
+    borderWidth: 2,
   },
   button: {
     backgroundColor: "#6200ee",
@@ -153,8 +165,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   successText: {
-    color: "green",
+    color: "#4caf50",
     marginTop: 20,
     textAlign: "center",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
