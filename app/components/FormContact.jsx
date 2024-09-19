@@ -25,7 +25,7 @@ export default function FormContact() {
     const newErrors = { name: "", email: "", message: "" };
 
     if (!name) {
-      newErrors.name = "Name is required";
+      newErrors.name = "Name is required.";
       valid = false;
     }
 
@@ -33,12 +33,12 @@ export default function FormContact() {
       newErrors.email = "Email is required";
       valid = false;
     } else if (!/\S+@\S+\.\S+/.test(email)) { // Validar que sea un correo válido
-      newErrors.email = "Enter a valid email";
+      newErrors.email = "Enter a valid email.";
       valid = false;
     }
 
     if (!message) {
-      newErrors.message = "Message is required";
+      newErrors.message = "Message is required.";
       valid = false;
     } else if (message.length < 10) { // Validar la longitud del mensaje
       newErrors.message = "Message must be at least 10 characters";
